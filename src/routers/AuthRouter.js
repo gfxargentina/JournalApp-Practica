@@ -19,8 +19,8 @@ export const AuthRouter = () => {
                     component={ RegisterScreen }
                 /> 
 
-                {/* si no entra en ninguna de las otras url redirecciona */}
-                <Redirect to="/auth/register" />
+                {/* si no entra en ninguna de las otras rutas redirecciona */}
+                <Redirect to="/auth/login" />
             </Switch>
             
         </div>

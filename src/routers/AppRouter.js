@@ -2,9 +2,10 @@ import React from 'react'
 import {
     BrowserRouter as Router,
     Switch,
-    Route
+    Route,
+    Redirect
   } from 'react-router-dom';
-import { JournalApp } from '../JournalApp';
+import { JournalScreen } from '../components/journal/JournalScreen';
 import { AuthRouter } from './AuthRouter';
 
 
@@ -19,9 +20,12 @@ export const AppRouter = () => {
                      />
 
                     <Route 
+                      exact  
                       path="/" 
-                      component={ JournalApp }
+                      component={ JournalScreen }
                       />
+
+                    <Redirect to="/auth/login" />
 
                 </Switch>
             </div>
