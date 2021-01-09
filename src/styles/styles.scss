@@ -1,3 +1,7 @@
 
 @import './base/settings';
 @import './base/base';//el estilo aplicado a toda la app
+
+//components
+@import './components/auth';
+@import './components/buttons';
