@@ -49,6 +49,7 @@
     display: flex;
     margin-bottom: 10px;
     overflow: hidden;
+    width: 97%;
 }
 
 .journal__entry-picture {
@@ -57,7 +58,7 @@
 }
 
 .journal__entry-body {
-    padding: 10px;
+    padding: 10px;    
 }
 
 .journal__entry-title {
@@ -80,6 +81,6 @@
 .-journal__entry-date span{
     font-size: 12px;
 }
-.journal__main-content {
+// .journal__main-content {
     
-}
+// }
