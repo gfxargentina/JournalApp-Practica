@@ -1,8 +1,8 @@
-import React from 'react'
-import { useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom'
-import { startGoogleLogin, startLogin } from '../../actions/auth'
-import { useForm } from '../../hooks/useForm'
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { startGoogleLogin, startLogin } from '../../actions/auth';
+import { useForm } from '../../hooks/useForm';
 
 export const LoginScreen = () => {
 
