@@ -2,9 +2,18 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useForm } from '../../hooks/useForm';
 import validator from 'validator';
+import { useDispatch, useSelector } from 'react-redux';
+import { setError, removeError } from '../../actions/ui';
 
 
 export const RegisterScreen = () => {
+
+    const dispatch = useDispatch();
+    //desestruturamos(sacamos) el msgError del state ui
+    const { msgError } = useSelector( state => state.ui )
+
+    //console.log(msgError)
+
 
     const [ formValues, handleInputChange ] = useForm({
         name: '',
@@ -26,17 +35,17 @@ export const RegisterScreen = () => {
 
     const isFormValid = () => {
         if ( name.trim().length === 0 ) {
-            console.log('El nombre es requerido');
+            dispatch( setError('El nombre es requerido') )
             return false;
         } else if ( !validator.isEmail(email) ) {
-            console.log('El email no es valido');
+            dispatch( setError('El email no es valido') )
             return false
         } else if ( password !== passwordConfirm || password.length < 5 ) {
-            console.log('La contraseña tiene que tener mas de 5 caracteras y deben ser iguales');
+            dispatch( setError('La contraseña tiene que tener mas de 5 caracteras y deben ser iguales') )
             return false
 
         }
-
+        dispatch( removeError() )
         return true
     }
 
@@ -46,9 +55,14 @@ export const RegisterScreen = () => {
         <>
             <h3 className="auth__title" >Crear nueva cuenta</h3>
             <form onSubmit={handleRegister}>
-                <div className="auth__alert-error">
-                    Formulario no valido                    
-                </div>
+                {/* mostrar mensaje de error */}
+                {
+                    msgError && (
+                        <div className="auth__alert-error">
+                           { msgError }                    
+                        </div>
+                    )
+                }
             <input 
                     type="text"
                     placeholder="Nombre"
