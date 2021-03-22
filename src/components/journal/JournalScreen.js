@@ -15,7 +15,7 @@ export const JournalScreen = () => {
 
             <main  >
                 { 
-                    //si la nota tiene algo devuelve noteScreen y si no
+                    //condicional, si la nota tiene algo devuelve noteScreen y si no
                     //tiene nada devuelve MainNothingSelected
                     ( active ) ? (<NoteScreen />) : (<MainNothingSelected />)
                 }
