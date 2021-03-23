@@ -20,7 +20,7 @@ export const notesReducer = ( state = initialState, action ) => {
 
         case types.notesLoad:
             //para ver que estamos recibiendo
-            console.log(action.payload)
+            //console.log(action.payload)
             return { 
                 ...state,
                 notes: [ ...action.payload ]

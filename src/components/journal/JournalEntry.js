@@ -1,28 +1,40 @@
 import React from 'react'
+import dayjs from 'dayjs'
 
-export const JournalEntry = () => {
+// advancedFormat permite usar la fecha ordinal entre otras opciones
+const advancedFormat = require("dayjs/plugin/advancedFormat");
+dayjs.extend(advancedFormat);
+
+
+export const JournalEntry = ( {id, date, title, body, url} ) => {
+    //console.log(id, date, title, body, url);
+
+    const day = dayjs(date);
+
     return (
         <div className="journal__entry pointer" >
-            <div className="journal__entry-picture"
-                 style={{
-                     backgroundSize: 'cover',
-                     backgroundImage: 'url(https://i.pinimg.com/originals/47/4e/a1/474ea1fce99a97e7bc5e6eaf8d49b76c.jpg)'
-                 }}
-             >
-
-            </div>
+            { //si la url de la imagen existe entonces mostrar &&
+                url &&
+                <div className="journal__entry-picture"
+                style={{
+                    backgroundSize: 'cover',
+                    backgroundImage: `url(${ url })`
+                }}
+            >
+           </div>
+            }
             <div className="journal__entry-body" >
                 <p className="journal__entry-title" >
-                    un nuevo dia
+                    { title }
                 </p>
                 <p className="journal__entry-content" >
-                    Lorem, ipsum dolor sit amet consectetur 
+                    { body } 
                 </p>
             </div>
 
             <div className="journal__entry-date" >
-                <span>Lunes</span>
-                <h4>28</h4>
+                <span>{day.format("dddd")}</span>
+                <h4>{day.format("Do")}</h4>
 
             </div>
             
