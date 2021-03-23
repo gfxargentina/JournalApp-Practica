@@ -11,6 +11,7 @@ import { useDispatch } from 'react-redux';
 import { login } from '../actions/auth';
 import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRoute';
+import { startLoadingNotes } from '../actions/notes';
 
 
 export const AppRouter = () => {
@@ -24,13 +25,17 @@ export const AppRouter = () => {
 
 
     useEffect(() => {
-         firebase.auth().onAuthStateChanged((user) =>{
+         firebase.auth().onAuthStateChanged( async(user) =>{
         // ?= si el objeto user tiene algo pregunta si existe el uid 
         //  si no existe, el user es null, la condicion se va a salir
             if ( user?.uid ) {
+                //si entra la condicion de abajo esta logueado de manera correcta
                 dispatch( login( user.uid, user.displayName ));
-                //si entra la condicion de arriba esta logueado de manera correcta
+                
                 setIsLoggedIn(true)
+                
+                dispatch( startLoadingNotes( user.uid ) )
+
              //caso contrario  
             } else {
                 setIsLoggedIn(false)
