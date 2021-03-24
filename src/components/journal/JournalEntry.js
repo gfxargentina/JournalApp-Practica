@@ -1,6 +1,7 @@
 import React from 'react'
 import dayjs from 'dayjs'
 
+
 // advancedFormat permite usar la fecha ordinal entre otras opciones
 const advancedFormat = require("dayjs/plugin/advancedFormat");
 dayjs.extend(advancedFormat);
@@ -33,8 +34,9 @@ export const JournalEntry = ( {id, date, title, body, url} ) => {
             </div>
 
             <div className="journal__entry-date" >
-                <span>{day.format("dddd")}</span>
-                <h4>{day.format("Do")}</h4>
+                <span>{day.locale('es').format("dddd")}</span>
+                <h4>{day.locale('es').format("D")}</h4>
+                <h4>{day.locale('es').format("MMMM")}</h4>
 
             </div>
             
