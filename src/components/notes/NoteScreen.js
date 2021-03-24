@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useSelector } from 'react-redux'
 import { useForm } from '../../hooks/useForm'
 import { NotesAppBar } from './NotesAppBar'
@@ -8,10 +8,22 @@ export const NoteScreen = () => {
 
     const { active:note } = useSelector( state => state.notes );
     //console.log(note)
-    const  [formValues, handleInputChange]  = useForm( note );
+    const  [formValues, handleInputChange, reset ]  = useForm( note );
     //console.log(formValues);
 
     const { body, title } = formValues;
+
+    const activeId = useRef( note.id );
+
+    useEffect(() => {
+    //si el note.id es diferente al activeId.current entonces  
+    //se resetea el formulario  
+        if ( note.id !== activeId.current ) {
+            reset( note );
+            //establece un nuevo valor al activeId
+            activeId.current = note.id;
+        }
+    }, [note, reset])
 
     return (
         <div className="notes__main-content" >
@@ -32,7 +44,7 @@ export const NoteScreen = () => {
                     onChange={ handleInputChange }
                     >
                     </textarea> 
-                     
+
                 {//si la url de la imagen existe entonces mostrarla
                  //si no existe no mostrar nada   
                     (note.url) ?? (
