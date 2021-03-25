@@ -1,10 +1,13 @@
 import React, { useEffect, useRef } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { activeNote } from '../../actions/notes'
 import { useForm } from '../../hooks/useForm'
 import { NotesAppBar } from './NotesAppBar'
 
 
 export const NoteScreen = () => {
+
+    const dispatch = useDispatch();
 
     const { active:note } = useSelector( state => state.notes );
     //console.log(note)
@@ -25,6 +28,13 @@ export const NoteScreen = () => {
         }
     }, [note, reset])
 
+    //este efecto sirve para editar la nota, si el titulo/body
+    //cambia este efecto lo muestra en el state
+    useEffect(() => {
+        //console.log(formValues)
+        dispatch( activeNote( formValues.id, {...formValues }));
+    }, [formValues, dispatch])
+
     return (
         <div className="notes__main-content" >
             <NotesAppBar />
@@ -34,12 +44,14 @@ export const NoteScreen = () => {
                     type="text"
                     placeholder="un titulo asombroso"
                     className="notes__title-input"
+                    name="title"
                     value={title}
                     onChange={ handleInputChange }
                     />
                 <textarea 
                     placeholder="Que paso hoy" 
                     className="notes__textarea"
+                    name="body"
                     value={ body }
                     onChange={ handleInputChange }
                     >
