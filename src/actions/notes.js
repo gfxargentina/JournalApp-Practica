@@ -1,5 +1,6 @@
 import Swal from "sweetalert2";
 import { db } from "../firebase/firebase-config";
+import { fileUpload } from "../helpers/fileUpload";
 import { loadNotes } from "../helpers/loadNotes";
 import { types } from "../types/types";
 
@@ -73,4 +74,17 @@ export const refreshNote = ( id, note) => ({
             ...note
         }
     }
-})
+});
+
+//accion para subir una imagen a cloudinary usando un helper
+export const startUploading = ( file ) => {
+    return async( dispatch, getState ) => {
+        const { active:activeNote } = getState().notes;
+        //console.log(file);
+        //console.log(activeNote)
+
+        const fileUrl = await fileUpload( file );
+        console.log(fileUrl);
+    }
+}
+
