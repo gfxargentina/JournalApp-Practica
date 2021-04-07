@@ -14,7 +14,7 @@ export const NoteScreen = () => {
     const  [formValues, handleInputChange, reset ]  = useForm( note );
     //console.log(formValues);
 
-    const { body, title, id } = formValues;
+    const { body, title, id, url } = formValues;
 
     const activeId = useRef( note.id );
     const activeUrl = useRef( note.url );
@@ -69,14 +69,25 @@ export const NoteScreen = () => {
 
                  {/* si la url de la imagen existe entonces mostrarla
                  si no existe no mostrar nada */}
-                {  
-                    (note.url) ?? (
-                        <div className="notes__image">
-                        <img src={ note.url } 
+                 {/* { url ??
+                        <div>
+                        <img src={ url } 
+                            className="notes__image"
                                 alt="imagen"
                         />   
                     </div>
-                    )}      
+                    }        */}
+
+                    {/* si la url de la imagen existe entonces mostrarla
+                 si no existe mostrar msj */}
+                 <div >
+                    { url ?
+                    <img src={ url }
+                         className="notes__image"
+                         alt="imagen"
+                        /> : 'Agregue una imagen' } 
+                    </div> 
+                    
             </div>
         <button 
             className="btn btn-danger"

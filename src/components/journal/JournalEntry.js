@@ -4,9 +4,8 @@ import { useDispatch } from 'react-redux';
 import { activeNote } from '../../actions/notes';
 
 
-// advancedFormat permite usar la fecha ordinal entre otras opciones
-const advancedFormat = require("dayjs/plugin/advancedFormat");
-dayjs.extend(advancedFormat);
+// activa dayjs para mostrar las fechas en español
+dayjs.locale("es");
 
 
 export const JournalEntry = ( {id, date, title, body, url} ) => {
@@ -48,9 +47,9 @@ export const JournalEntry = ( {id, date, title, body, url} ) => {
             </div>
 
             <div className="journal__entry-date" >
-                <span>{day.locale('es').format("dddd")}</span>
-                <h4>{day.locale('es').format("D")}</h4>
-                <h4>{day.locale('es').format("MMMM")}</h4>
+                <span>{day.format('dddd')}</span>
+                <h4>{day.format('D')}</h4>
+                <h4>{day.format('MMMM')}</h4>
 
             </div>
             
