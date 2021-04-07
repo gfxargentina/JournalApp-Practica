@@ -83,8 +83,42 @@ export const startUploading = ( file ) => {
         //console.log(file);
         //console.log(activeNote)
 
+        Swal.fire({
+            title: 'Subiendo imagen...',
+            text: 'Porfavor espere...',
+            allowOutsideClick: false,
+            showConfirmButton: false,
+            willOpen: () => {
+                Swal.showLoading();
+            }
+        })
+
         const fileUrl = await fileUpload( file );
-        console.log(fileUrl);
+        //console.log(fileUrl);
+
+        activeNote.url = fileUrl;
+
+        dispatch( startSaveNote( activeNote ));
+        
+
+        Swal.close();
+        
     }
 }
 
+//borrar una nota
+
+export const startDeleting = ( id ) => {
+    return async( dispatch, getState ) => {
+
+        const uid = getState().auth.uid;
+        await db.doc(`${ uid }/journal/notes/${ id }`).delete();
+        dispatch( deleteNote(id) );
+
+    }
+}
+
+export const deleteNote = (id) => ({
+    type: types.notesDelete,
+    payload: id
+})
