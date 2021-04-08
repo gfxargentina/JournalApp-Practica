@@ -19,12 +19,22 @@ export const startNewNote = () => {
         const doc = await db.collection(`${ uid }/journal/notes`).add( newNote );
         //console.log(doc)
         dispatch( activeNote( doc.id, newNote ));
+        dispatch( addNewNote( doc.id, newNote ));
 
     }
 }
 
 export const activeNote = ( id, note) => ({
     type: types.notesActive,
+    payload: {
+        id,
+        ...note
+    }
+})
+
+//agrega una nueva nota
+export const addNewNote = ( id, note ) => ({
+    type: types.notesAddNew,
     payload: {
         id,
         ...note
@@ -65,6 +75,7 @@ export const startSaveNote = ( note ) => {
 
 }
 
+//actualizar nota si es editada
 export const refreshNote = ( id, note) => ({
     type: types.notesUpdate,
     payload: {
@@ -121,4 +132,9 @@ export const startDeleting = ( id ) => {
 export const deleteNote = (id) => ({
     type: types.notesDelete,
     payload: id
+})
+
+//limpiar el estado al salir de la aplicacion
+export const noteLogout = () => ({
+    type: types.notesLogoutCleaning,
 })
