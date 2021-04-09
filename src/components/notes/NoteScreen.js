@@ -46,10 +46,10 @@ export const NoteScreen = () => {
     }
 
     return (
-        <div className="notes__main-content" >
+        <div className="notes__main-content animate__animated animate__fadeIn animate__faster " >
             <NotesAppBar />
 
-            <div className="notes__content" >
+            <div className="notes__content " >
                 <input 
                     type="text"
                     placeholder="un titulo asombroso"
@@ -67,26 +67,26 @@ export const NoteScreen = () => {
                     >
                     </textarea> 
 
-                 {/* si la url de la imagen existe entonces mostrarla
+                 {/* si la url de la imagen existe -true - entonces mostrarla
                  si no existe no mostrar nada */}
-                 {/* { url ??
+                  { url &&
                         <div>
                         <img src={ url } 
                             className="notes__image"
                                 alt="imagen"
                         />   
                     </div>
-                    }        */}
+                    }        
 
                     {/* si la url de la imagen existe entonces mostrarla
                  si no existe mostrar msj */}
-                 <div >
+                 {/* <div >
                     { url ?
                     <img src={ url }
                          className="notes__image"
                          alt="imagen"
                         /> : 'Agregue una imagen' } 
-                    </div> 
+                    </div>  */}
                     
             </div>
         <button 

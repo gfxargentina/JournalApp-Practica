@@ -56,7 +56,9 @@ export const RegisterScreen = () => {
     return (
         <>
             <h3 className="auth__title" >Crear nueva cuenta</h3>
-            <form onSubmit={handleRegister}>
+            <form onSubmit={handleRegister}
+                  className="animate__animated animate__fadeIn animate__faster"  
+            >
                 {/* mostrar mensaje de error */}
                 {
                     msgError && (
